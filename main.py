@@ -2,12 +2,11 @@ import requests
 import random
 import string
 from flask import Flask, jsonify,url_for,redirect,request,render_template
+import secret
 
-
-
-web_app_url = """
-https://script.google.com/macros/s/AKfycbz9t33xKI0mWZYnyreixOe16xHWRbIInladAEZaCF5faJ9qv-DbhCdakW01Y5C5MboeGQ/exec
-""".strip()
+web_app_url = secret.web_app_url
+# web_app_url = """
+# """.strip()
 urls =  {}
 
 app = Flask(__name__)
