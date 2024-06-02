@@ -1,3 +1,9 @@
+const popup = document.querySelector(".popup"),
+  close = popup.querySelector(".close"),
+  field = popup.querySelector(".field"),
+  input = field.querySelector("input"),
+  copy = field.querySelector("button");
+
 $(document).ready(function () {
   $("#formurl").on("submit", function (event) {
     event.preventDefault();
@@ -5,27 +11,14 @@ $(document).ready(function () {
     var longurl = $('input[name="longurl"]').val();
     var customurl = $('input[name="customurl"]').val();
 
-    function isValidUrl(string) {
-      try {
-        new URL(string);
-        return true;
-      } catch (err) {
-        return false;
-      }
-    }
-
-    if (!isValidUrl(longurl)) {
-      alert("Invalid URL");
-      return;
-    }
-
     $.ajax({
       url: "/generate",
       type: "post",
       data: { longurl: longurl, customurl: customurl },
       success: function (data) {
+        // Set the input value to the short URL
         input.value = data.short_url;
-
+        // Trigger the view button click event
         popup.classList.toggle("show");
       },
       error: function (error) {
